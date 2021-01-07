@@ -36,6 +36,7 @@ export default {
       seletWay: "",
       selectWayFun: (index: number) => {
         data.seletWay = data.btns[index];
+        console.log(111)
       },
     });
     const refData = toRefs(data);
