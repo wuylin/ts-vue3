@@ -10,22 +10,21 @@
 </template>
 
 <script lang="ts">
+// ref函数: 生成响应式对象 reactive函数: 生成响应式对象 toRefs函数
 import {
   reactive,
   toRefs,
-  onMounted,       // 组件挂载完成后执行的函数
-  onBeforeMount,   // 组件挂载到节点之前执行的函数
-  onBeforeUpdate,  // 组件更新之前执行的函数
-  onUpdated,       // 组件更新完成之后执行的函数 
+  onMounted, // 组件挂载完成后执行的函数
+  onBeforeMount, // 组件挂载到节点之前执行的函数
+  onBeforeUpdate, // 组件更新之前执行的函数
+  onUpdated, // 组件更新完成之后执行的函数
 } from "vue";
 
 export default {
   name: "App",
   // setup函数代替了data和methods属性，将变量和方法直接写进去便可以使用，但必须使用return 返回
-  // ref函数: 生成响应式对象
-  // reactive函数: 生成响应式对象
-  // toRefs函数
   setup() {
+    console.log('1-----setup 开始创建组件')
     interface DataProps {
       btns: string[];
       seletWay: string;
@@ -36,9 +35,22 @@ export default {
       seletWay: "",
       selectWayFun: (index: number) => {
         data.seletWay = data.btns[index];
-        console.log(111)
+        console.log(111);
       },
     });
+    onBeforeMount(()=>{
+      console.log('2-----onBeforeMount 组件挂载到页面之前执行')
+    }),
+    onMounted(()=>{
+      console.log('3-----onMounted 组件挂载到页面之后执行')
+    }),
+    onBeforeUpdate(()=>{
+      console.log('4-----onBeforeUpdate 组件更新之前')
+    }),
+    onUpdated(()=>{
+      console.log('5-----onUpdated 组件更新之后')
+    })
+
     const refData = toRefs(data);
     return { ...refData };
   },
